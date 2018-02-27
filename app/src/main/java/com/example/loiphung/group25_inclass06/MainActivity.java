@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.go_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String categoriesArray[] = new String[] {"Business", "Entertainment", "General", "Health", "Sports"};
+                final String categoriesArray[] = new String[] {"Business", "Entertainment", "General", "Health", "Sports", "Technology", "Science"};
                 builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Select from the list");
                 builder.setItems(categoriesArray, new DialogInterface.OnClickListener() {
