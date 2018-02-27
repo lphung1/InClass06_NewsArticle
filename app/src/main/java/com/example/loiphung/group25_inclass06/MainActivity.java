@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -80,16 +81,22 @@ public class MainActivity extends AppCompatActivity {
         private ProgressDialog dialog;
         AlertDialog alert;
         AlertDialog.Builder builder;
+        ProgressBar pb;
 
         public GetDataAsync(MainActivity activity) {
             dialog = new ProgressDialog(activity);
             //alert = new AlertDialog(activity);
+            pb = findViewById(R.id.progressBar);
+            pb.setProgress(0);
+            pb.setMax(100);
+
         }
 
         @Override
         protected void onPreExecute() {
             //dialog.setMessage("Loading sources");
             //dialog.show();
+
 
 
         }
@@ -131,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                         result.add(a);
+                        pb.setProgress(pb.getProgress() + 1);
+                        publishProgress(pb.getProgress());
                     }
                 }
             } catch (Exception e) {
@@ -141,10 +150,24 @@ public class MainActivity extends AppCompatActivity {
             return result;
         }
 
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+
+            pb.setProgress(values[0]);
+
+
+        }
+
         protected void onPostExecute(ArrayList<Article> result) {
 
-            if (dialog.isShowing()) {
-                dialog.dismiss();
+            if (pb.getProgress() != pb.getMax()) {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                pb.setProgress(pb.getMax());
             }
 
 
@@ -157,6 +180,15 @@ public class MainActivity extends AppCompatActivity {
             final ListView listView = findViewById(R.id.ListView);
             CustomArticleAdapter adapter = new CustomArticleAdapter(MainActivity.this, R.layout.article_row, result);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String url = MainActivity.articlesArrayList.get(position).getUrl();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+            });
 
 
 

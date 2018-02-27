@@ -14,20 +14,28 @@
         android:layout_alignParentTop="true"
         android:text="Button" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/PressGoText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/go_button"
+        android:layout_height="48dp"
         android:layout_alignParentStart="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Press_GO" />
+        android:text="Press Go!"
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/ListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText" />
+        android:layout_below="@+id/go_button"
+        android:layout_marginTop="0dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

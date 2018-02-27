@@ -36,12 +36,13 @@ public class CustomArticleAdapter extends ArrayAdapter<Article> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Article article = this.getItem(position);
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.article_row, parent, false);
-
+        TextView titleName = convertView.findViewById(R.id.articleTitleText);
         TextView sourceName = convertView.findViewById(R.id.articleTitleDescription_textview);
         ImageView imageView = convertView.findViewById(R.id.article_image_view);
 
 
         sourceName.setText(article.toString());
+        titleName.setText(article.getTitle());
         new ImageDownloaderTask(imageView).execute(article.getUrlToImage());
         Log.d("Picture URL", article.getUrlToImage());
 
