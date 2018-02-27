@@ -62,7 +62,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return getTitle() + "\n" +getAuthor() + "\n" + getDate();
+        return getTitle() + "\n" + getDate();
     }
 
     public int getPictureID() {
