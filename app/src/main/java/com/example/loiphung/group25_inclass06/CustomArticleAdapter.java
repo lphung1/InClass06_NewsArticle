@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +45,7 @@ public class CustomArticleAdapter extends ArrayAdapter<Article> {
 
         sourceName.setText(article.toString());
         titleName.setText(article.getTitle());
-        new ImageDownloaderTask(imageView).execute(article.getUrlToImage());
+        Picasso.get().load(article.getUrlToImage()).into(imageView);
         Log.d("Picture URL", article.getUrlToImage());
 
 
